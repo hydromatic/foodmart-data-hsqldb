@@ -81,6 +81,8 @@ granularity, and the closure view computes the transitive closure of
 the employee hierarchy using a recursive query. Because they are views,
 they are recomputed on every query; they can be used to accelerate
 queries provided that they are materialized as tables and indexed.
+The database at `jdbc:hsqldb:res:foodmart-mat` (see
+[below](#materialized-views)) does exactly that.
 
 Its size is about 15MB uncompressed, 4MB compressed.
 
@@ -122,6 +124,19 @@ resultSet.close();
 statement.close();
 connection.close();
 ```
+
+## Materialized views
+
+The jar contains a second database, `jdbc:hsqldb:res:foodmart-mat`
+(constant `FoodmartHsqldb.MATERIALIZED_URI`), that is identical to
+the first except that the summary views and the closure view are
+materialized as memory tables, with the same indexes as the original
+tables. Queries that use the aggregate tables are much faster
+(a lookup by `customer_id` in `agg_c_14_sales_fact_1997` takes about
+0.2 ms rather than 150 ms), at the cost of computing the tables when
+the database is opened (about 2.6 seconds rather than 1.1 seconds).
+The data (the CSV files) is shared between the two databases, so the
+second database adds only a few kilobytes to the jar.
 
 ## Using SQLLine
 

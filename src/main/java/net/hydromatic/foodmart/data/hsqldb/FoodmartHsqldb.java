@@ -27,8 +27,23 @@ import java.util.Map;
 
 /** Foodmart data set in hsqldb format. */
 public class FoodmartHsqldb {
-  /** URI of the hsqldb database. */
+  /**
+   * URI of the hsqldb database.
+   *
+   * <p>In this database, the aggregate tables and {@code employee_closure} are
+   * views, computed on demand from the base tables.
+   */
   public static final String URI = "jdbc:hsqldb:res:foodmart";
+
+  /**
+   * URI of the hsqldb database in which the aggregate tables and {@code
+   * employee_closure} are materialized as indexed memory tables.
+   *
+   * <p>The contents are identical to those of {@link #URI}. Queries that use
+   * the aggregate tables are faster, at the cost of about 1.5 seconds to
+   * compute the tables when the database is opened.
+   */
+  public static final String MATERIALIZED_URI = "jdbc:hsqldb:res:foodmart-mat";
 
   public static final String USER = "FOODMART";
   public static final String PASSWORD = "FOODMART";

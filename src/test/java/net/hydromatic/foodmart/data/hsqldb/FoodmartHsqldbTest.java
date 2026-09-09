@@ -69,9 +69,18 @@ public class FoodmartHsqldbTest {
 
   @Test
   public void testRowCounts() throws SQLException {
+    checkRowCounts(FoodmartHsqldb.URI);
+  }
+
+  @Test
+  public void testMaterializedRowCounts() throws SQLException {
+    checkRowCounts(FoodmartHsqldb.MATERIALIZED_URI);
+  }
+
+  private void checkRowCounts(String uri) throws SQLException {
     final Connection connection =
         DriverManager.getConnection(
-            FoodmartHsqldb.URI, FoodmartHsqldb.USER, FoodmartHsqldb.PASSWORD);
+            uri, FoodmartHsqldb.USER, FoodmartHsqldb.PASSWORD);
     final Statement statement = connection.createStatement();
 
     // Expected row counts for each table and view
@@ -115,6 +124,166 @@ public class FoodmartHsqldbTest {
 
     statement.close();
     connection.close();
+  }
+
+  /**
+   * Names of the objects that are views in {@link FoodmartHsqldb#URI} and
+   * memory tables in {@link FoodmartHsqldb#MATERIALIZED_URI}.
+   */
+  private static final List<String> VIEW_NAMES =
+      Arrays.asList(
+          "agg_c_10_sales_fact_1997",
+          "agg_c_14_sales_fact_1997",
+          "agg_c_special_sales_fact_1997",
+          "agg_g_ms_pcat_sales_fact_1997",
+          "agg_l_03_sales_fact_1997",
+          "agg_l_04_sales_fact_1997",
+          "agg_l_05_sales_fact_1997",
+          "agg_lc_06_sales_fact_1997",
+          "agg_lc_100_sales_fact_1997",
+          "agg_ll_01_sales_fact_1997",
+          "agg_pl_01_sales_fact_1997",
+          "employee_closure");
+
+  /**
+   * Tests that the aggregate tables are views in one database and indexed
+   * memory tables in the other.
+   */
+  @Test
+  public void testMaterializedTableTypes() throws SQLException {
+    try (Connection c1 =
+            DriverManager.getConnection(
+                FoodmartHsqldb.URI,
+                FoodmartHsqldb.USER,
+                FoodmartHsqldb.PASSWORD);
+        Connection c2 =
+            DriverManager.getConnection(
+                FoodmartHsqldb.MATERIALIZED_URI,
+                FoodmartHsqldb.USER,
+                FoodmartHsqldb.PASSWORD)) {
+      for (String name : VIEW_NAMES) {
+        assertEquals(name, "VIEW", tableType(c1, name));
+        assertEquals(name, "TABLE", tableType(c2, name));
+      }
+      // The materialized tables have the indexes that the original tables had.
+      assertEquals(4, indexCount(c2, "agg_c_14_sales_fact_1997"));
+      assertEquals(8, indexCount(c2, "agg_g_ms_pcat_sales_fact_1997"));
+      assertEquals(2, indexCount(c2, "employee_closure"));
+      assertEquals(0, indexCount(c2, "agg_c_10_sales_fact_1997"));
+    }
+  }
+
+  /** Tests that each view has the same contents as its materialized table. */
+  @Test
+  public void testMaterializedContents() throws SQLException {
+    try (Connection c1 =
+            DriverManager.getConnection(
+                FoodmartHsqldb.URI,
+                FoodmartHsqldb.USER,
+                FoodmartHsqldb.PASSWORD);
+        Connection c2 =
+            DriverManager.getConnection(
+                FoodmartHsqldb.MATERIALIZED_URI,
+                FoodmartHsqldb.USER,
+                FoodmartHsqldb.PASSWORD)) {
+      for (String name : VIEW_NAMES) {
+        final List<String> rows1 = rows(c1, name);
+        final List<String> rows2 = rows(c2, name);
+        assertEquals(name, rows1.size(), rows2.size());
+        assertEquals(name, rows1, rows2);
+      }
+    }
+  }
+
+  /**
+   * Tests that {@code foodmart-mat.script} is {@code foodmart.script} with each
+   * {@code CREATE VIEW} replaced by a materialized memory table (and possibly
+   * indexes), and a different database name.
+   */
+  @Test
+  public void testScriptsInSync() throws IOException {
+    final List<String> script = readResource("/foodmart.script");
+    final List<String> matScript = readResource("/foodmart-mat.script");
+    final List<String> expected = new ArrayList<>();
+    for (String line : script) {
+      if (line.startsWith("CREATE VIEW ")) {
+        final int i = line.indexOf("\" AS ");
+        final String name = line.substring("CREATE VIEW ".length(), i + 1);
+        final String query = line.substring(i + "\" AS ".length());
+        expected.add(
+            "CREATE MEMORY TABLE " + name + " AS (" + query + ") WITH DATA");
+      } else if (line.startsWith("SET DATABASE UNIQUE NAME ")) {
+        expected.add("SET DATABASE UNIQUE NAME HSQLDB7F6D6E49B7");
+      } else {
+        expected.add(line);
+      }
+    }
+    // Ignore the index statements on the materialized tables.
+    final List<String> actual = new ArrayList<>();
+    for (String line : matScript) {
+      if (!line.matches(
+          "CREATE (UNIQUE )?INDEX .* ON \"foodmart\"\\.\"(agg_.*|employee_closure)\".*")) {
+        actual.add(line);
+      }
+    }
+    assertEquals(expected, actual);
+    assertEquals(
+        readResource("/foodmart.properties"),
+        readResource("/foodmart-mat.properties"));
+  }
+
+  private static List<String> readResource(String name) throws IOException {
+    try (java.io.InputStream is =
+            FoodmartHsqldbTest.class.getResourceAsStream(name);
+        java.io.BufferedReader r =
+            new java.io.BufferedReader(new java.io.InputStreamReader(is))) {
+      return r.lines().collect(Collectors.toList());
+    }
+  }
+
+  private static String tableType(Connection c, String name)
+      throws SQLException {
+    try (ResultSet rs =
+        c.getMetaData().getTables(null, "foodmart", name, null)) {
+      assertTrue(name, rs.next());
+      return rs.getString("TABLE_TYPE");
+    }
+  }
+
+  private static int indexCount(Connection c, String name) throws SQLException {
+    int n = 0;
+    try (ResultSet rs =
+        c.getMetaData().getIndexInfo(null, "foodmart", name, false, false)) {
+      while (rs.next()) {
+        if (rs.getString("INDEX_NAME") != null
+            && rs.getShort("ORDINAL_POSITION") == 1) {
+          n++;
+        }
+      }
+    }
+    return n;
+  }
+
+  /**
+   * Returns the rows of a table or view, each formatted as a string, sorted.
+   */
+  private static List<String> rows(Connection c, String name)
+      throws SQLException {
+    final List<String> list = new ArrayList<>();
+    try (Statement s = c.createStatement();
+        ResultSet rs =
+            s.executeQuery("select * from \"foodmart\".\"" + name + "\"")) {
+      final int n = rs.getMetaData().getColumnCount();
+      while (rs.next()) {
+        final StringBuilder b = new StringBuilder();
+        for (int i = 1; i <= n; i++) {
+          b.append(rs.getObject(i)).append(',');
+        }
+        list.add(b.toString());
+      }
+    }
+    Collections.sort(list);
+    return list;
   }
 
   @Test
