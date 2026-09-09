@@ -39,7 +39,11 @@ public class FoodmartHsqldb {
   }
 
   /**
-   * Invokes the consumer for each table in the Foodmart schema.
+   * Invokes the consumer for each base table in the Foodmart schema.
+   *
+   * <p>Views (the aggregate tables and {@code employee_closure}) are not
+   * included, because they have no CSV file; their contents are derived from
+   * the base tables.
    *
    * @param consumer Consumer to invoke for each table with its name and quoted
    *     column names
@@ -51,25 +55,6 @@ public class FoodmartHsqldb {
         "account_type",
         "account_rollup",
         "Custom_Members");
-    consumer.accept("agg_c_10_sales_fact_1997", "quarter");
-    consumer.accept("agg_c_14_sales_fact_1997", "quarter");
-    consumer.accept("agg_c_special_sales_fact_1997", "time_quarter");
-    consumer.accept(
-        "agg_g_ms_pcat_sales_fact_1997",
-        "gender",
-        "marital_status",
-        "product_family",
-        "product_department",
-        "product_category",
-        "quarter");
-    consumer.accept("agg_l_03_sales_fact_1997");
-    consumer.accept("agg_l_04_sales_fact_1997");
-    consumer.accept("agg_l_05_sales_fact_1997");
-    consumer.accept(
-        "agg_lc_06_sales_fact_1997", "city", "state_province", "country");
-    consumer.accept("agg_lc_100_sales_fact_1997", "quarter");
-    consumer.accept("agg_ll_01_sales_fact_1997");
-    consumer.accept("agg_pl_01_sales_fact_1997");
     consumer.accept(
         "category",
         "category_id",
@@ -117,7 +102,6 @@ public class FoodmartHsqldb {
         "marital_status",
         "gender",
         "management_role");
-    consumer.accept("employee_closure");
     consumer.accept("expense_fact", "exp_date", "category_id");
     consumer.accept("inventory_fact_1997");
     consumer.accept("inventory_fact_1998");
@@ -213,7 +197,7 @@ public class FoodmartHsqldb {
     consumer.accept("warehouse_class", "description");
   }
 
-  /** Returns the list of table names in the Foodmart schema. */
+  /** Returns the list of base table names in the Foodmart schema. */
   public static List<String> tableNames() {
     List<String> names = new ArrayList<>();
     forEachTable((tableName, quotedColumns) -> names.add(tableName));

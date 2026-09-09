@@ -26,24 +26,12 @@ CREATE SCHEMA "foodmart" AUTHORIZATION SA
 SET SCHEMA "foodmart_csv"
 SET DATABASE TEXT TABLE DEFAULTS 'quoted=true;all_quoted=false;encoding=ASCII;fs=,;qc="'
 CREATE TEXT TABLE "foodmart_csv"."csv_account"("account_id" INTEGER NOT NULL,"account_parent" INTEGER,"account_description" VARCHAR(30),"account_type" VARCHAR(30) NOT NULL,"account_rollup" VARCHAR(30) NOT NULL,"Custom_Members" VARCHAR(255))
-CREATE TEXT TABLE "foodmart_csv"."csv_agg_c_10_sales_fact_1997"("month_of_year" SMALLINT NOT NULL,"quarter" VARCHAR(30) NOT NULL,"the_year" SMALLINT NOT NULL,"store_sales" DECIMAL(10,4) NOT NULL,"store_cost" DECIMAL(10,4) NOT NULL,"unit_sales" DECIMAL(10,4) NOT NULL,"customer_count" INTEGER NOT NULL,"fact_count" INTEGER NOT NULL)
-CREATE TEXT TABLE "foodmart_csv"."csv_agg_c_14_sales_fact_1997"("product_id" INTEGER NOT NULL,"customer_id" INTEGER NOT NULL,"store_id" INTEGER NOT NULL,"promotion_id" INTEGER NOT NULL,"month_of_year" SMALLINT NOT NULL,"quarter" VARCHAR(30) NOT NULL,"the_year" SMALLINT NOT NULL,"store_sales" DECIMAL(10,4) NOT NULL,"store_cost" DECIMAL(10,4) NOT NULL,"unit_sales" DECIMAL(10,4) NOT NULL,"fact_count" INTEGER NOT NULL)
-CREATE TEXT TABLE "foodmart_csv"."csv_agg_c_special_sales_fact_1997"("product_id" INTEGER NOT NULL,"promotion_id" INTEGER NOT NULL,"customer_id" INTEGER NOT NULL,"store_id" INTEGER NOT NULL,"time_month" SMALLINT NOT NULL,"time_quarter" VARCHAR(30) NOT NULL,"time_year" SMALLINT NOT NULL,"store_sales_sum" DECIMAL(10,4) NOT NULL,"store_cost_sum" DECIMAL(10,4) NOT NULL,"unit_sales_sum" DECIMAL(10,4) NOT NULL,"fact_count" INTEGER NOT NULL)
-CREATE TEXT TABLE "foodmart_csv"."csv_agg_g_ms_pcat_sales_fact_1997"("gender" VARCHAR(30) NOT NULL,"marital_status" VARCHAR(30) NOT NULL,"product_family" VARCHAR(30),"product_department" VARCHAR(30),"product_category" VARCHAR(30),"month_of_year" SMALLINT NOT NULL,"quarter" VARCHAR(30) NOT NULL,"the_year" SMALLINT NOT NULL,"store_sales" DECIMAL(10,4) NOT NULL,"store_cost" DECIMAL(10,4) NOT NULL,"unit_sales" DECIMAL(10,4) NOT NULL,"customer_count" INTEGER NOT NULL,"fact_count" INTEGER NOT NULL)
-CREATE TEXT TABLE "foodmart_csv"."csv_agg_l_03_sales_fact_1997"("time_id" INTEGER NOT NULL,"customer_id" INTEGER NOT NULL,"store_sales" DECIMAL(10,4) NOT NULL,"store_cost" DECIMAL(10,4) NOT NULL,"unit_sales" DECIMAL(10,4) NOT NULL,"fact_count" INTEGER NOT NULL)
-CREATE TEXT TABLE "foodmart_csv"."csv_agg_l_04_sales_fact_1997"("time_id" INTEGER NOT NULL,"store_sales" DECIMAL(10,4) NOT NULL,"store_cost" DECIMAL(10,4) NOT NULL,"unit_sales" DECIMAL(10,4) NOT NULL,"customer_count" INTEGER NOT NULL,"fact_count" INTEGER NOT NULL)
-CREATE TEXT TABLE "foodmart_csv"."csv_agg_l_05_sales_fact_1997"("product_id" INTEGER NOT NULL,"customer_id" INTEGER NOT NULL,"promotion_id" INTEGER NOT NULL,"store_id" INTEGER NOT NULL,"store_sales" DECIMAL(10,4) NOT NULL,"store_cost" DECIMAL(10,4) NOT NULL,"unit_sales" DECIMAL(10,4) NOT NULL,"fact_count" INTEGER NOT NULL)
-CREATE TEXT TABLE "foodmart_csv"."csv_agg_lc_06_sales_fact_1997"("time_id" INTEGER NOT NULL,"city" VARCHAR(30) NOT NULL,"state_province" VARCHAR(30) NOT NULL,"country" VARCHAR(30) NOT NULL,"store_sales" DECIMAL(10,4) NOT NULL,"store_cost" DECIMAL(10,4) NOT NULL,"unit_sales" DECIMAL(10,4) NOT NULL,"fact_count" INTEGER NOT NULL)
-CREATE TEXT TABLE "foodmart_csv"."csv_agg_lc_100_sales_fact_1997"("product_id" INTEGER NOT NULL,"customer_id" INTEGER NOT NULL,"quarter" VARCHAR(30) NOT NULL,"the_year" SMALLINT NOT NULL,"store_sales" DECIMAL(10,4) NOT NULL,"store_cost" DECIMAL(10,4) NOT NULL,"unit_sales" DECIMAL(10,4) NOT NULL,"fact_count" INTEGER NOT NULL)
-CREATE TEXT TABLE "foodmart_csv"."csv_agg_ll_01_sales_fact_1997"("product_id" INTEGER NOT NULL,"time_id" INTEGER NOT NULL,"customer_id" INTEGER NOT NULL,"store_sales" DECIMAL(10,4) NOT NULL,"store_cost" DECIMAL(10,4) NOT NULL,"unit_sales" DECIMAL(10,4) NOT NULL,"fact_count" INTEGER NOT NULL)
-CREATE TEXT TABLE "foodmart_csv"."csv_agg_pl_01_sales_fact_1997"("product_id" INTEGER NOT NULL,"time_id" INTEGER NOT NULL,"customer_id" INTEGER NOT NULL,"store_sales_sum" DECIMAL(10,4) NOT NULL,"store_cost_sum" DECIMAL(10,4) NOT NULL,"unit_sales_sum" DECIMAL(10,4) NOT NULL,"fact_count" INTEGER NOT NULL)
 CREATE TEXT TABLE "foodmart_csv"."csv_category"("category_id" VARCHAR(30) NOT NULL,"category_parent" VARCHAR(30),"category_description" VARCHAR(30) NOT NULL,"category_rollup" VARCHAR(30))
 CREATE TEXT TABLE "foodmart_csv"."csv_currency"("currency_id" INTEGER NOT NULL,"date" DATE NOT NULL,"currency" VARCHAR(30) NOT NULL,"conversion_ratio" DECIMAL(10,4) NOT NULL)
 CREATE TEXT TABLE "foodmart_csv"."csv_customer"("customer_id" INTEGER NOT NULL,"account_num" BIGINT NOT NULL,"lname" VARCHAR(30) NOT NULL,"fname" VARCHAR(30) NOT NULL,"mi" VARCHAR(30),"address1" VARCHAR(30),"address2" VARCHAR(30),"address3" VARCHAR(30),"address4" VARCHAR(30),"city" VARCHAR(30),"state_province" VARCHAR(30),"postal_code" VARCHAR(30) NOT NULL,"country" VARCHAR(30) NOT NULL,"customer_region_id" INTEGER NOT NULL,"phone1" VARCHAR(30) NOT NULL,"phone2" VARCHAR(30) NOT NULL,"birthdate" DATE NOT NULL,"marital_status" VARCHAR(30) NOT NULL,"yearly_income" VARCHAR(30) NOT NULL,"gender" VARCHAR(30) NOT NULL,"total_children" SMALLINT NOT NULL,"num_children_at_home" SMALLINT NOT NULL,"education" VARCHAR(30) NOT NULL,"date_accnt_opened" DATE NOT NULL,"member_card" VARCHAR(30),"occupation" VARCHAR(30),"houseowner" VARCHAR(30),"num_cars_owned" INTEGER,"fullname" VARCHAR(60) NOT NULL)
 CREATE TEXT TABLE "foodmart_csv"."csv_days"("day" INTEGER NOT NULL,"week_day" VARCHAR(30) NOT NULL)
 CREATE TEXT TABLE "foodmart_csv"."csv_department"("department_id" INTEGER NOT NULL,"department_description" VARCHAR(30) NOT NULL)
 CREATE TEXT TABLE "foodmart_csv"."csv_employee"("employee_id" INTEGER NOT NULL,"full_name" VARCHAR(30) NOT NULL,"first_name" VARCHAR(30) NOT NULL,"last_name" VARCHAR(30) NOT NULL,"position_id" INTEGER,"position_title" VARCHAR(30),"store_id" INTEGER NOT NULL,"department_id" INTEGER NOT NULL,"birth_date" DATE NOT NULL,"hire_date" TIMESTAMP,"end_date" TIMESTAMP,"salary" DECIMAL(10,4) NOT NULL,"supervisor_id" INTEGER,"education_level" VARCHAR(30) NOT NULL,"marital_status" VARCHAR(30) NOT NULL,"gender" VARCHAR(30) NOT NULL,"management_role" VARCHAR(30))
-CREATE TEXT TABLE "foodmart_csv"."csv_employee_closure"("employee_id" INTEGER NOT NULL,"supervisor_id" INTEGER NOT NULL,"distance" INTEGER)
 CREATE TEXT TABLE "foodmart_csv"."csv_expense_fact"("store_id" INTEGER NOT NULL,"account_id" INTEGER NOT NULL,"exp_date" TIMESTAMP NOT NULL,"time_id" INTEGER NOT NULL,"category_id" VARCHAR(30) NOT NULL,"currency_id" INTEGER NOT NULL,"amount" DECIMAL(10,4) NOT NULL)
 CREATE TEXT TABLE "foodmart_csv"."csv_inventory_fact_1997"("product_id" INTEGER NOT NULL,"time_id" INTEGER,"warehouse_id" INTEGER,"store_id" INTEGER,"units_ordered" INTEGER,"units_shipped" INTEGER,"warehouse_sales" DECIMAL(10,4),"warehouse_cost" DECIMAL(10,4),"supply_time" SMALLINT,"store_invoice" DECIMAL(10,4))
 CREATE TEXT TABLE "foodmart_csv"."csv_inventory_fact_1998"("product_id" INTEGER NOT NULL,"time_id" INTEGER,"warehouse_id" INTEGER,"store_id" INTEGER,"units_ordered" INTEGER,"units_shipped" INTEGER,"warehouse_sales" DECIMAL(10,4),"warehouse_cost" DECIMAL(10,4),"supply_time" SMALLINT,"store_invoice" DECIMAL(10,4))
@@ -63,24 +51,12 @@ CREATE TEXT TABLE "foodmart_csv"."csv_time_by_day"("time_id" INTEGER NOT NULL,"t
 CREATE TEXT TABLE "foodmart_csv"."csv_warehouse"("warehouse_id" INTEGER NOT NULL,"warehouse_class_id" INTEGER,"stores_id" INTEGER,"warehouse_name" VARCHAR(60),"wa_address1" VARCHAR(30),"wa_address2" VARCHAR(30),"wa_address3" VARCHAR(30),"wa_address4" VARCHAR(30),"warehouse_city" VARCHAR(30),"warehouse_state_province" VARCHAR(30),"warehouse_postal_code" VARCHAR(30),"warehouse_country" VARCHAR(30),"warehouse_owner_name" VARCHAR(30),"warehouse_phone" VARCHAR(30),"warehouse_fax" VARCHAR(30))
 CREATE TEXT TABLE "foodmart_csv"."csv_warehouse_class"("warehouse_class_id" INTEGER NOT NULL,"description" VARCHAR(30))
 SET TABLE "foodmart_csv"."csv_account" SOURCE '/csv/account.csv;ignore_first=true' DESC
-SET TABLE "foodmart_csv"."csv_agg_c_10_sales_fact_1997" SOURCE '/csv/agg_c_10_sales_fact_1997.csv;ignore_first=true' DESC
-SET TABLE "foodmart_csv"."csv_agg_c_14_sales_fact_1997" SOURCE '/csv/agg_c_14_sales_fact_1997.csv;ignore_first=true' DESC
-SET TABLE "foodmart_csv"."csv_agg_c_special_sales_fact_1997" SOURCE '/csv/agg_c_special_sales_fact_1997.csv;ignore_first=true' DESC
-SET TABLE "foodmart_csv"."csv_agg_g_ms_pcat_sales_fact_1997" SOURCE '/csv/agg_g_ms_pcat_sales_fact_1997.csv;ignore_first=true' DESC
-SET TABLE "foodmart_csv"."csv_agg_l_03_sales_fact_1997" SOURCE '/csv/agg_l_03_sales_fact_1997.csv;ignore_first=true' DESC
-SET TABLE "foodmart_csv"."csv_agg_l_04_sales_fact_1997" SOURCE '/csv/agg_l_04_sales_fact_1997.csv;ignore_first=true' DESC
-SET TABLE "foodmart_csv"."csv_agg_l_05_sales_fact_1997" SOURCE '/csv/agg_l_05_sales_fact_1997.csv;ignore_first=true' DESC
-SET TABLE "foodmart_csv"."csv_agg_lc_06_sales_fact_1997" SOURCE '/csv/agg_lc_06_sales_fact_1997.csv;ignore_first=true' DESC
-SET TABLE "foodmart_csv"."csv_agg_lc_100_sales_fact_1997" SOURCE '/csv/agg_lc_100_sales_fact_1997.csv;ignore_first=true' DESC
-SET TABLE "foodmart_csv"."csv_agg_ll_01_sales_fact_1997" SOURCE '/csv/agg_ll_01_sales_fact_1997.csv;ignore_first=true' DESC
-SET TABLE "foodmart_csv"."csv_agg_pl_01_sales_fact_1997" SOURCE '/csv/agg_pl_01_sales_fact_1997.csv;ignore_first=true' DESC
 SET TABLE "foodmart_csv"."csv_category" SOURCE '/csv/category.csv;ignore_first=true' DESC
 SET TABLE "foodmart_csv"."csv_currency" SOURCE '/csv/currency.csv;ignore_first=true' DESC
 SET TABLE "foodmart_csv"."csv_customer" SOURCE '/csv/customer.csv;ignore_first=true' DESC
 SET TABLE "foodmart_csv"."csv_days" SOURCE '/csv/days.csv;ignore_first=true' DESC
 SET TABLE "foodmart_csv"."csv_department" SOURCE '/csv/department.csv;ignore_first=true' DESC
 SET TABLE "foodmart_csv"."csv_employee" SOURCE '/csv/employee.csv;ignore_first=true' DESC
-SET TABLE "foodmart_csv"."csv_employee_closure" SOURCE '/csv/employee_closure.csv;ignore_first=true' DESC
 SET TABLE "foodmart_csv"."csv_expense_fact" SOURCE '/csv/expense_fact.csv;ignore_first=true' DESC
 SET TABLE "foodmart_csv"."csv_inventory_fact_1997" SOURCE '/csv/inventory_fact_1997.csv;ignore_first=true' DESC
 SET TABLE "foodmart_csv"."csv_inventory_fact_1998" SOURCE '/csv/inventory_fact_1998.csv;ignore_first=true' DESC
@@ -128,45 +104,6 @@ CREATE INDEX "i_inv_98_prod_id" ON "foodmart"."inventory_fact_1998"("product_id"
 CREATE INDEX "i_inv_98_store_id" ON "foodmart"."inventory_fact_1998"("store_id")
 CREATE INDEX "i_inv_98_time_id" ON "foodmart"."inventory_fact_1998"("time_id")
 CREATE INDEX "i_inv_98_wrhse_id" ON "foodmart"."inventory_fact_1998"("warehouse_id")
-CREATE MEMORY TABLE "foodmart"."agg_pl_01_sales_fact_1997" AS (SELECT * FROM "foodmart_csv"."csv_agg_pl_01_sales_fact_1997") WITH DATA
-CREATE INDEX "i_sls97pl01cust" ON "foodmart"."agg_pl_01_sales_fact_1997"("customer_id")
-CREATE INDEX "i_sls97pl01prod" ON "foodmart"."agg_pl_01_sales_fact_1997"("product_id")
-CREATE INDEX "i_sls97pl01time" ON "foodmart"."agg_pl_01_sales_fact_1997"("time_id")
-CREATE MEMORY TABLE "foodmart"."agg_ll_01_sales_fact_1997" AS (SELECT * FROM "foodmart_csv"."csv_agg_ll_01_sales_fact_1997") WITH DATA
-CREATE INDEX "i_sls97ll01cust" ON "foodmart"."agg_ll_01_sales_fact_1997"("customer_id")
-CREATE INDEX "i_sls97ll01prod" ON "foodmart"."agg_ll_01_sales_fact_1997"("product_id")
-CREATE INDEX "i_sls97ll01time" ON "foodmart"."agg_ll_01_sales_fact_1997"("time_id")
-CREATE MEMORY TABLE "foodmart"."agg_l_03_sales_fact_1997" AS (SELECT * FROM "foodmart_csv"."csv_agg_l_03_sales_fact_1997") WITH DATA
-CREATE MEMORY TABLE "foodmart"."agg_l_04_sales_fact_1997" AS (SELECT * FROM "foodmart_csv"."csv_agg_l_04_sales_fact_1997") WITH DATA
-CREATE MEMORY TABLE "foodmart"."agg_l_05_sales_fact_1997" AS (SELECT * FROM "foodmart_csv"."csv_agg_l_05_sales_fact_1997") WITH DATA
-CREATE INDEX "i_sls97l05cust" ON "foodmart"."agg_l_05_sales_fact_1997"("customer_id")
-CREATE INDEX "i_sls97l05prod" ON "foodmart"."agg_l_05_sales_fact_1997"("product_id")
-CREATE INDEX "i_sls97l05promo" ON "foodmart"."agg_l_05_sales_fact_1997"("promotion_id")
-CREATE INDEX "i_sls97l05store" ON "foodmart"."agg_l_05_sales_fact_1997"("store_id")
-CREATE MEMORY TABLE "foodmart"."agg_c_10_sales_fact_1997" AS (SELECT * FROM "foodmart_csv"."csv_agg_c_10_sales_fact_1997") WITH DATA
-CREATE MEMORY TABLE "foodmart"."agg_c_14_sales_fact_1997" AS (SELECT * FROM "foodmart_csv"."csv_agg_c_14_sales_fact_1997") WITH DATA
-CREATE INDEX "i_sls97c14cust" ON "foodmart"."agg_c_14_sales_fact_1997"("customer_id")
-CREATE INDEX "i_sls97c14prod" ON "foodmart"."agg_c_14_sales_fact_1997"("product_id")
-CREATE INDEX "i_sls97c14promo" ON "foodmart"."agg_c_14_sales_fact_1997"("promotion_id")
-CREATE INDEX "i_sls97c14store" ON "foodmart"."agg_c_14_sales_fact_1997"("store_id")
-CREATE MEMORY TABLE "foodmart"."agg_lc_100_sales_fact_1997" AS (SELECT * FROM "foodmart_csv"."csv_agg_lc_100_sales_fact_1997") WITH DATA
-CREATE INDEX "i_sls97lc100cust" ON "foodmart"."agg_lc_100_sales_fact_1997"("customer_id")
-CREATE INDEX "i_sls97lc100prod" ON "foodmart"."agg_lc_100_sales_fact_1997"("product_id")
-CREATE MEMORY TABLE "foodmart"."agg_c_special_sales_fact_1997" AS (SELECT * FROM "foodmart_csv"."csv_agg_c_special_sales_fact_1997") WITH DATA
-CREATE INDEX "i_sls97speccust" ON "foodmart"."agg_c_special_sales_fact_1997"("customer_id")
-CREATE INDEX "i_sls97specprod" ON "foodmart"."agg_c_special_sales_fact_1997"("product_id")
-CREATE INDEX "i_sls97specpromo" ON "foodmart"."agg_c_special_sales_fact_1997"("promotion_id")
-CREATE INDEX "i_sls97specstore" ON "foodmart"."agg_c_special_sales_fact_1997"("store_id")
-CREATE MEMORY TABLE "foodmart"."agg_g_ms_pcat_sales_fact_1997" AS (SELECT * FROM "foodmart_csv"."csv_agg_g_ms_pcat_sales_fact_1997") WITH DATA
-CREATE INDEX "i_sls97gmp_gender" ON "foodmart"."agg_g_ms_pcat_sales_fact_1997"("gender")
-CREATE INDEX "i_sls97gmp_ms" ON "foodmart"."agg_g_ms_pcat_sales_fact_1997"("marital_status")
-CREATE INDEX "i_sls97gmp_pfam" ON "foodmart"."agg_g_ms_pcat_sales_fact_1997"("product_family")
-CREATE INDEX "i_sls97gmp_pdept" ON "foodmart"."agg_g_ms_pcat_sales_fact_1997"("product_department")
-CREATE INDEX "i_sls97gmp_pcat" ON "foodmart"."agg_g_ms_pcat_sales_fact_1997"("product_category")
-CREATE INDEX "i_sls97gmp_tmonth" ON "foodmart"."agg_g_ms_pcat_sales_fact_1997"("month_of_year")
-CREATE INDEX "i_sls97gmp_tquarter" ON "foodmart"."agg_g_ms_pcat_sales_fact_1997"("quarter")
-CREATE INDEX "i_sls97gmp_tyear" ON "foodmart"."agg_g_ms_pcat_sales_fact_1997"("the_year")
-CREATE MEMORY TABLE "foodmart"."agg_lc_06_sales_fact_1997" AS (SELECT * FROM "foodmart_csv"."csv_agg_lc_06_sales_fact_1997") WITH DATA
 CREATE MEMORY TABLE "foodmart"."currency" AS (SELECT * FROM "foodmart_csv"."csv_currency") WITH DATA
 CREATE UNIQUE INDEX "i_currency" ON "foodmart"."currency"("currency_id","date")
 CREATE MEMORY TABLE "foodmart"."account" AS (SELECT * FROM "foodmart_csv"."csv_account") WITH DATA
@@ -191,9 +128,6 @@ CREATE UNIQUE INDEX "i_employee_id" ON "foodmart"."employee"("employee_id")
 CREATE INDEX "i_empl_dept_id" ON "foodmart"."employee"("department_id")
 CREATE INDEX "i_empl_store_id" ON "foodmart"."employee"("store_id")
 CREATE INDEX "i_empl_super_id" ON "foodmart"."employee"("supervisor_id")
-CREATE MEMORY TABLE "foodmart"."employee_closure" AS (SELECT * FROM "foodmart_csv"."csv_employee_closure") WITH DATA
-CREATE UNIQUE INDEX "i_empl_closure" ON "foodmart"."employee_closure"("supervisor_id","employee_id")
-CREATE INDEX "i_empl_closure_emp" ON "foodmart"."employee_closure"("employee_id")
 CREATE MEMORY TABLE "foodmart"."expense_fact" AS (SELECT * FROM "foodmart_csv"."csv_expense_fact") WITH DATA
 CREATE INDEX "i_expense_store_id" ON "foodmart"."expense_fact"("store_id")
 CREATE INDEX "i_expense_acct_id" ON "foodmart"."expense_fact"("account_id")
@@ -233,6 +167,18 @@ CREATE INDEX "i_time_quarter" ON "foodmart"."time_by_day"("quarter")
 CREATE INDEX "i_time_month" ON "foodmart"."time_by_day"("month_of_year")
 CREATE MEMORY TABLE "foodmart"."warehouse" AS (SELECT * FROM "foodmart_csv"."csv_warehouse") WITH DATA
 CREATE MEMORY TABLE "foodmart"."warehouse_class" AS (SELECT * FROM "foodmart_csv"."csv_warehouse_class") WITH DATA
+CREATE VIEW "foodmart"."agg_c_10_sales_fact_1997" AS SELECT t."month_of_year",t."quarter",t."the_year",CAST(SUM(s."store_sales") AS DECIMAL(10,4)) AS "store_sales",CAST(SUM(s."store_cost") AS DECIMAL(10,4)) AS "store_cost",CAST(SUM(s."unit_sales") AS DECIMAL(10,4)) AS "unit_sales",CAST(COUNT(DISTINCT s."customer_id") AS INTEGER) AS "customer_count",CAST(COUNT(*) AS INTEGER) AS "fact_count" FROM "foodmart"."sales_fact_1997" AS s JOIN "foodmart"."time_by_day" AS t ON s."time_id" = t."time_id" GROUP BY t."month_of_year",t."quarter",t."the_year"
+CREATE VIEW "foodmart"."agg_c_14_sales_fact_1997" AS SELECT s."product_id",s."customer_id",s."store_id",s."promotion_id",t."month_of_year",t."quarter",t."the_year",CAST(SUM(s."store_sales") AS DECIMAL(10,4)) AS "store_sales",CAST(SUM(s."store_cost") AS DECIMAL(10,4)) AS "store_cost",CAST(SUM(s."unit_sales") AS DECIMAL(10,4)) AS "unit_sales",CAST(COUNT(*) AS INTEGER) AS "fact_count" FROM "foodmart"."sales_fact_1997" AS s JOIN "foodmart"."time_by_day" AS t ON s."time_id" = t."time_id" GROUP BY s."product_id",s."customer_id",s."store_id",s."promotion_id",t."month_of_year",t."quarter",t."the_year"
+CREATE VIEW "foodmart"."agg_c_special_sales_fact_1997" AS SELECT s."product_id",s."promotion_id",s."customer_id",s."store_id",t."month_of_year" AS "time_month",t."quarter" AS "time_quarter",t."the_year" AS "time_year",CAST(SUM(s."store_sales") AS DECIMAL(10,4)) AS "store_sales_sum",CAST(SUM(s."store_cost") AS DECIMAL(10,4)) AS "store_cost_sum",CAST(SUM(s."unit_sales") AS DECIMAL(10,4)) AS "unit_sales_sum",CAST(COUNT(*) AS INTEGER) AS "fact_count" FROM "foodmart"."sales_fact_1997" AS s JOIN "foodmart"."time_by_day" AS t ON s."time_id" = t."time_id" GROUP BY s."product_id",s."promotion_id",s."customer_id",s."store_id",t."month_of_year",t."quarter",t."the_year"
+CREATE VIEW "foodmart"."agg_g_ms_pcat_sales_fact_1997" AS SELECT c."gender",c."marital_status",pc."product_family",pc."product_department",pc."product_category",t."month_of_year",t."quarter",t."the_year",CAST(SUM(s."store_sales") AS DECIMAL(10,4)) AS "store_sales",CAST(SUM(s."store_cost") AS DECIMAL(10,4)) AS "store_cost",CAST(SUM(s."unit_sales") AS DECIMAL(10,4)) AS "unit_sales",CAST(COUNT(DISTINCT s."customer_id") AS INTEGER) AS "customer_count",CAST(COUNT(*) AS INTEGER) AS "fact_count" FROM "foodmart"."sales_fact_1997" AS s JOIN "foodmart"."time_by_day" AS t ON s."time_id" = t."time_id" JOIN "foodmart"."customer" AS c ON s."customer_id" = c."customer_id" JOIN "foodmart"."product" AS p ON s."product_id" = p."product_id" JOIN "foodmart"."product_class" AS pc ON p."product_class_id" = pc."product_class_id" GROUP BY c."gender",c."marital_status",pc."product_family",pc."product_department",pc."product_category",t."month_of_year",t."quarter",t."the_year"
+CREATE VIEW "foodmart"."agg_l_03_sales_fact_1997" AS SELECT s."time_id",s."customer_id",CAST(SUM(s."store_sales") AS DECIMAL(10,4)) AS "store_sales",CAST(SUM(s."store_cost") AS DECIMAL(10,4)) AS "store_cost",CAST(SUM(s."unit_sales") AS DECIMAL(10,4)) AS "unit_sales",CAST(COUNT(*) AS INTEGER) AS "fact_count" FROM "foodmart"."sales_fact_1997" AS s GROUP BY s."time_id",s."customer_id"
+CREATE VIEW "foodmart"."agg_l_04_sales_fact_1997" AS SELECT s."time_id",CAST(SUM(s."store_sales") AS DECIMAL(10,4)) AS "store_sales",CAST(SUM(s."store_cost") AS DECIMAL(10,4)) AS "store_cost",CAST(SUM(s."unit_sales") AS DECIMAL(10,4)) AS "unit_sales",CAST(COUNT(DISTINCT s."customer_id") AS INTEGER) AS "customer_count",CAST(COUNT(*) AS INTEGER) AS "fact_count" FROM "foodmart"."sales_fact_1997" AS s GROUP BY s."time_id"
+CREATE VIEW "foodmart"."agg_l_05_sales_fact_1997" AS SELECT s."product_id",s."customer_id",s."promotion_id",s."store_id",CAST(SUM(s."store_sales") AS DECIMAL(10,4)) AS "store_sales",CAST(SUM(s."store_cost") AS DECIMAL(10,4)) AS "store_cost",CAST(SUM(s."unit_sales") AS DECIMAL(10,4)) AS "unit_sales",CAST(COUNT(*) AS INTEGER) AS "fact_count" FROM "foodmart"."sales_fact_1997" AS s GROUP BY s."product_id",s."customer_id",s."promotion_id",s."store_id"
+CREATE VIEW "foodmart"."agg_lc_06_sales_fact_1997" AS SELECT s."time_id",c."city",c."state_province",c."country",CAST(SUM(s."store_sales") AS DECIMAL(10,4)) AS "store_sales",CAST(SUM(s."store_cost") AS DECIMAL(10,4)) AS "store_cost",CAST(SUM(s."unit_sales") AS DECIMAL(10,4)) AS "unit_sales",CAST(COUNT(*) AS INTEGER) AS "fact_count" FROM "foodmart"."sales_fact_1997" AS s JOIN "foodmart"."customer" AS c ON s."customer_id" = c."customer_id" GROUP BY s."time_id",c."city",c."state_province",c."country"
+CREATE VIEW "foodmart"."agg_lc_100_sales_fact_1997" AS SELECT s."product_id",s."customer_id",t."quarter",t."the_year",CAST(SUM(s."store_sales") AS DECIMAL(10,4)) AS "store_sales",CAST(SUM(s."store_cost") AS DECIMAL(10,4)) AS "store_cost",CAST(SUM(s."unit_sales") AS DECIMAL(10,4)) AS "unit_sales",CAST(COUNT(*) AS INTEGER) AS "fact_count" FROM "foodmart"."sales_fact_1997" AS s JOIN "foodmart"."time_by_day" AS t ON s."time_id" = t."time_id" GROUP BY s."product_id",s."customer_id",t."quarter",t."the_year"
+CREATE VIEW "foodmart"."agg_ll_01_sales_fact_1997" AS SELECT s."product_id",s."time_id",s."customer_id",CAST(SUM(s."store_sales") AS DECIMAL(10,4)) AS "store_sales",CAST(SUM(s."store_cost") AS DECIMAL(10,4)) AS "store_cost",CAST(SUM(s."unit_sales") AS DECIMAL(10,4)) AS "unit_sales",CAST(COUNT(*) AS INTEGER) AS "fact_count" FROM "foodmart"."sales_fact_1997" AS s GROUP BY s."product_id",s."time_id",s."customer_id"
+CREATE VIEW "foodmart"."agg_pl_01_sales_fact_1997" AS SELECT s."product_id",s."time_id",s."customer_id",CAST(SUM(s."store_sales") AS DECIMAL(10,4)) AS "store_sales_sum",CAST(SUM(s."store_cost") AS DECIMAL(10,4)) AS "store_cost_sum",CAST(SUM(s."unit_sales") AS DECIMAL(10,4)) AS "unit_sales_sum",CAST(COUNT(*) AS INTEGER) AS "fact_count" FROM "foodmart"."sales_fact_1997" AS s GROUP BY s."product_id",s."time_id",s."customer_id"
+CREATE VIEW "foodmart"."employee_closure" AS WITH RECURSIVE "closure"("employee_id","supervisor_id","distance") AS (SELECT "employee_id","employee_id",0 FROM "foodmart"."employee" UNION SELECT c."employee_id",s."employee_id",c."distance"+1 FROM "closure" AS c JOIN "foodmart"."employee" AS e ON c."supervisor_id" = e."employee_id" JOIN "foodmart"."employee" AS s ON e."supervisor_id" = s."employee_id" WHERE s."employee_id" <> e."employee_id") SELECT "employee_id","supervisor_id","distance" FROM "closure"
 ALTER SEQUENCE SYSTEM_LOBS.LOB_ID RESTART WITH 1
 SET DATABASE DEFAULT INITIAL SCHEMA "foodmart"
 GRANT USAGE ON DOMAIN INFORMATION_SCHEMA.YES_OR_NO TO PUBLIC

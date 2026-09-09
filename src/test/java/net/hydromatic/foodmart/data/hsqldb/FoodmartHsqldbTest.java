@@ -49,10 +49,10 @@ public class FoodmartHsqldbTest {
   @Test
   public void testTableNames() {
     final List<String> tableNames = FoodmartHsqldb.tableNames();
-    assertEquals(37, tableNames.size());
+    assertEquals(25, tableNames.size());
     assertEquals("account", tableNames.get(0));
-    assertEquals("agg_c_10_sales_fact_1997", tableNames.get(1));
-    assertEquals("warehouse_class", tableNames.get(36));
+    assertEquals("category", tableNames.get(1));
+    assertEquals("warehouse_class", tableNames.get(24));
   }
 
   @Test
@@ -61,10 +61,10 @@ public class FoodmartHsqldbTest {
         FoodmartHsqldb.tableNames().stream()
             .map(FoodmartHsqldb::tableUri)
             .collect(Collectors.toList());
-    assertEquals(37, uris.size());
+    assertEquals(25, uris.size());
     assertEquals("/csv/account.csv", uris.get(0));
-    assertEquals("/csv/agg_c_10_sales_fact_1997.csv", uris.get(1));
-    assertEquals("/csv/warehouse_class.csv", uris.get(36));
+    assertEquals("/csv/category.csv", uris.get(1));
+    assertEquals("/csv/warehouse_class.csv", uris.get(24));
   }
 
   @Test
@@ -74,7 +74,7 @@ public class FoodmartHsqldbTest {
             FoodmartHsqldb.URI, FoodmartHsqldb.USER, FoodmartHsqldb.PASSWORD);
     final Statement statement = connection.createStatement();
 
-    // Expected row counts for each table
+    // Expected row counts for each table and view
     checkRowCount(statement, "account", 11);
     checkRowCount(statement, "agg_c_10_sales_fact_1997", 12);
     checkRowCount(statement, "agg_c_14_sales_fact_1997", 86805);
@@ -165,11 +165,12 @@ public class FoodmartHsqldbTest {
     }
 
     // Verify total count and counts for some tables
+    // Views (the aggregate tables and employee_closure) have no CSV file
+    // and therefore generate no INSERT statements.
     int expectedCount =
-        11 + 12 + 86805 + 86805 + 2637 + 20522 + 323 + 86154 + 4464 + 86602
-            + 86829 + 86829 + 4 + 72 + 10281 + 7 + 12 + 1155 + 7179 + 2400
-            + 4070 + 7282 + 18 + 1560 + 110 + 1864 + 110 + 143 + 21252 + 86837
-            + 164558 + 18325 + 25 + 25 + 730 + 24 + 6;
+        11 + 4 + 72 + 10281 + 7 + 12 + 1155 + 2400 + 4070 + 7282 + 18 + 1560
+            + 110 + 1864 + 110 + 143 + 21252 + 86837 + 164558 + 18325 + 25 + 25
+            + 730 + 24 + 6;
     assertEquals(expectedCount, count);
     assertEquals(11, accountCount);
     assertEquals(10281, customerCount);

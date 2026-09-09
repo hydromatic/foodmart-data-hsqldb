@@ -33,13 +33,56 @@ It originated as part of the test suite of the
 
 ## Schema
 
-Foodmart contains 37 tables:
-* 7 fact tables: sales_fact_1997, sales_fact_1998, sales_fact_dec_1998,
-  inventory_fact_1997, inventory_fact_1998, salary, expense_fact
-* 19 dimension tables: product, customer, time_by_day, employee and more
-* 11 aggregate tables
+Foodmart contains 25 tables (7 fact tables and 18 dimension tables)
+and 12 views (11 summary views and a closure view):
 
-Its size is about 24MB uncompressed, 8MB compressed.
+| Name                            | Kind            |    Rows |
+|---------------------------------|-----------------|--------:|
+| `account`                       | dimension table |      11 |
+| `agg_c_10_sales_fact_1997`      | summary view    |      12 |
+| `agg_c_14_sales_fact_1997`      | summary view    |  86,805 |
+| `agg_c_special_sales_fact_1997` | summary view    |  86,805 |
+| `agg_g_ms_pcat_sales_fact_1997` | summary view    |   2,637 |
+| `agg_l_03_sales_fact_1997`      | summary view    |  20,522 |
+| `agg_l_04_sales_fact_1997`      | summary view    |     323 |
+| `agg_l_05_sales_fact_1997`      | summary view    |  86,154 |
+| `agg_lc_06_sales_fact_1997`     | summary view    |   4,464 |
+| `agg_lc_100_sales_fact_1997`    | summary view    |  86,602 |
+| `agg_ll_01_sales_fact_1997`     | summary view    |  86,829 |
+| `agg_pl_01_sales_fact_1997`     | summary view    |  86,829 |
+| `category`                      | dimension table |       4 |
+| `currency`                      | dimension table |      72 |
+| `customer`                      | dimension table |  10,281 |
+| `days`                          | dimension table |       7 |
+| `department`                    | dimension table |      12 |
+| `employee`                      | dimension table |   1,155 |
+| `employee_closure`              | closure view    |   7,179 |
+| `expense_fact`                  | fact table      |   2,400 |
+| `inventory_fact_1997`           | fact table      |   4,070 |
+| `inventory_fact_1998`           | fact table      |   7,282 |
+| `position`                      | dimension table |      18 |
+| `product`                       | dimension table |   1,560 |
+| `product_class`                 | dimension table |     110 |
+| `promotion`                     | dimension table |   1,864 |
+| `region`                        | dimension table |     110 |
+| `reserve_employee`              | dimension table |     143 |
+| `salary`                        | fact table      |  21,252 |
+| `sales_fact_1997`               | fact table      |  86,837 |
+| `sales_fact_1998`               | fact table      | 164,558 |
+| `sales_fact_dec_1998`           | fact table      |  18,325 |
+| `store`                         | dimension table |      25 |
+| `store_ragged`                  | dimension table |      25 |
+| `time_by_day`                   | dimension table |     730 |
+| `warehouse`                     | dimension table |      24 |
+| `warehouse_class`               | dimension table |       6 |
+
+The summary views aggregate `sales_fact_1997` to various levels of
+granularity, and the closure view computes the transitive closure of
+the employee hierarchy using a recursive query. Because they are views,
+they are recomputed on every query; they can be used to accelerate
+queries provided that they are materialized as tables and indexed.
+
+Its size is about 15MB uncompressed, 4MB compressed.
 
 Here is a schema diagram:
 
