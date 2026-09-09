@@ -18,8 +18,8 @@ language governing permissions and limitations under the
 License.
 {% endcomment %}
 -->
-[![Build Status](https://github.com/julianhyde/foodmart-data-hsqldb/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/julianhyde/foodmart-data-hsqldb/actions?query=branch%3Amain)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.hydromatic/foodmart-data-hsqldb/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.hydromatic/foodmart-data-hsqldb)
+[![Build Status](https://github.com/hydromatic/foodmart-data-hsqldb/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/hydromatic/foodmart-data-hsqldb/actions?query=branch%3Amain)
+[![Maven Central](https://img.shields.io/maven-central/v/net.hydromatic/foodmart-data-hsqldb)](https://central.sonatype.com/artifact/net.hydromatic/foodmart-data-hsqldb)
 [![javadoc](https://javadoc.io/badge2/net.hydromatic/foodmart-data-hsqldb/javadoc.svg)](https://javadoc.io/doc/net.hydromatic/foodmart-data-hsqldb)
 
 # foodmart-data-hsqldb
@@ -122,7 +122,7 @@ Get foodmart-data-hsqldb from
 Use Java version 11 or higher.
 
 ```bash
-$ git clone https://github.com/julianhyde/foodmart-data-hsqldb.git
+$ git clone https://github.com/hydromatic/foodmart-data-hsqldb.git
 $ cd foodmart-data-hsqldb
 $ ./mvnw install
 ```
@@ -142,6 +142,8 @@ requires at least JDK 11.
 Similar data sets:
 * [chinook-data-hsqldb](https://github.com/julianhyde/chinook-data-hsqldb)
 * [flight-data-hsqldb](https://github.com/julianhyde/flight-data-hsqldb)
+* [foodmart-data](https://github.com/julianhyde/foodmart-data)
+  (the same data set as CSV files, for Go and Rust)
 * [foodmart-data-json](https://github.com/julianhyde/foodmart-data-json)
 * [foodmart-data-mysql](https://github.com/julianhyde/foodmart-data-mysql)
 * [foodmart-queries](https://github.com/julianhyde/foodmart-queries)
@@ -156,10 +158,10 @@ Similar data sets:
 * **Author:** [Julian Hyde](https://github.com/julianhyde)
   ([@julianhyde](https://twitter.com/julianhyde))
 * **Blog:** http://blog.hydromatic.net
-* **Source code:** https://github.com/julianhyde/foodmart-data-hsqldb
+* **Source code:** https://github.com/hydromatic/foodmart-data-hsqldb
 * **Developers list:**
   [dev@calcite.apache.org](mailto:dev@calcite.apache.org)
   ([archive](https://mail-archives.apache.org/mod_mbox/calcite-dev/),
   [subscribe](mailto:dev-subscribe@calcite.apache.org))
-* **Issues:** https://github.com/julianhyde/foodmart-data-hsqldb/issues
+* **Issues:** https://github.com/hydromatic/foodmart-data-hsqldb/issues
 * **Release notes:** [HISTORY.md](HISTORY.md)

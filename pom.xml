@@ -30,7 +30,7 @@ limitations under the License.
 
   <name>foodmart-data-hsqldb</name>
   <description>Foodmart data set in hsqldb format</description>
-  <url>http://github.com/julianhyde/foodmart-data-hsqldb</url>
+  <url>http://github.com/hydromatic/foodmart-data-hsqldb</url>
   <inceptionYear>2015</inceptionYear>
   <organization>
     <name>Julian Hyde</name>
@@ -101,13 +101,13 @@ limitations under the License.
 
   <issueManagement>
     <system>github</system>
-    <url>https://github.com/julianhyde/foodmart-data-hsqldb/issues</url>
+    <url>https://github.com/hydromatic/foodmart-data-hsqldb/issues</url>
   </issueManagement>
 
   <scm>
-    <connection>scm:git:git://github.com/julianhyde/foodmart-data-hsqldb.git</connection>
-    <developerConnection>scm:git:git@github.com:julianhyde/foodmart-data-hsqldb.git</developerConnection>
-    <url>scm:git:git://github.com/julianhyde/foodmart-data-hsqldb.git</url>
+    <connection>scm:git:git://github.com/hydromatic/foodmart-data-hsqldb.git</connection>
+    <developerConnection>scm:git:git@github.com:hydromatic/foodmart-data-hsqldb.git</developerConnection>
+    <url>scm:git:git://github.com/hydromatic/foodmart-data-hsqldb.git</url>
     <tag>HEAD</tag>
   </scm>
 

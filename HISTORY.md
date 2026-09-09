@@ -1,9 +1,9 @@
 # Foodmart data for hsqldb release history and change log
 
 For a full list of releases, see
-<a href="https://github.com/julianhyde/foodmart-data-hsqldb/releases">GitHub</a>.
+<a href="https://github.com/hydromatic/foodmart-data-hsqldb/releases">GitHub</a>.
 
-## <a id="0.6.1" href="https://github.com/julianhyde/foodmart-data-hsqldb/releases/tag/foodmart-data-hsqldb-0.6.1">0.6.1</a> / 2026-09-09
+## <a id="0.6.1" href="https://github.com/hydromatic/foodmart-data-hsqldb/releases/tag/foodmart-data-hsqldb-0.6.1">0.6.1</a> / 2026-09-09
 
 The previous release had a serious performance problem, and
 therefore this is a patch release. We strongly recommend using this
@@ -20,7 +20,7 @@ the CSV files can be read directly from the jar file.
   text tables)
 * Bump `maven-javadoc-plugin` from 2.9.1 to 3.6.3
 
-## <a id="0.6" href="https://github.com/julianhyde/foodmart-data-hsqldb/releases/tag/foodmart-data-hsqldb-0.6">0.6</a> / 2025-10-18
+## <a id="0.6" href="https://github.com/hydromatic/foodmart-data-hsqldb/releases/tag/foodmart-data-hsqldb-0.6">0.6</a> / 2025-10-18
 
 This release moves the data from an HSQLDB `foodmart.script` file to a
 `.csv` file for each table; consumers may now access those files from
@@ -42,7 +42,7 @@ version is now 2.7.4.
 * Change git clone URL to HTTPS
 * Add Javadoc badge to README
 
-## <a id="0.5" href="https://github.com/julianhyde/foodmart-data-hsqldb/releases/tag/foodmart-data-hsqldb-0.5">0.5</a> / 2022-03-08
+## <a id="0.5" href="https://github.com/hydromatic/foodmart-data-hsqldb/releases/tag/foodmart-data-hsqldb-0.5">0.5</a> / 2022-03-08
 
 This release changes the file format from HSQLDB 1.8 to 2.0,
 and therefore supports any HSQLDB version 2.0.0 or higher;
@@ -53,13 +53,13 @@ to use 2.6.1 and higher you will need Java 11.
 * Add a unit test
 * Add Apache Maven wrapper
 * Enable Dependabot
-* [[FDH-1](https://github.com/julianhyde/foodmart-data-hsqldb/issues/1)] Schema diagram
+* [[FDH-1](https://github.com/hydromatic/foodmart-data-hsqldb/issues/1)] Schema diagram
 
-## <a id="0.4" href="https://github.com/julianhyde/foodmart-data-hsqldb/releases/tag/foodmart-data-hsqldb-0.4">0.4</a> / 2015-04-07
+## <a id="0.4" href="https://github.com/hydromatic/foodmart-data-hsqldb/releases/tag/foodmart-data-hsqldb-0.4">0.4</a> / 2015-04-07
 
 * Set initial schema to "foodmart", so you can use unqualified table names in SQL
 
-## <a id="0.3" href="https://github.com/julianhyde/foodmart-data-hsqldb/releases/tag/foodmart-data-hsqldb-0.3">0.3</a> / 2015-03-05
+## <a id="0.3" href="https://github.com/hydromatic/foodmart-data-hsqldb/releases/tag/foodmart-data-hsqldb-0.3">0.3</a> / 2015-03-05
 
 * Publish releases to <a href="http://search.maven.org/">Maven Central</a>
 * Sign jars
