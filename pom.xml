@@ -25,7 +25,7 @@ limitations under the License.
   </parent>
 
   <artifactId>foodmart-data-hsqldb</artifactId>
-  <version>0.7-SNAPSHOT</version>
+  <version>0.7</version>
   <packaging>jar</packaging>
 
   <name>foodmart-data-hsqldb</name>
@@ -108,7 +108,7 @@ limitations under the License.
     <connection>scm:git:git://github.com/hydromatic/foodmart-data-hsqldb.git</connection>
     <developerConnection>scm:git:git@github.com:hydromatic/foodmart-data-hsqldb.git</developerConnection>
     <url>scm:git:git://github.com/hydromatic/foodmart-data-hsqldb.git</url>
-    <tag>HEAD</tag>
+    <tag>foodmart-data-hsqldb-0.7</tag>
   </scm>
 
   <dependencies>
