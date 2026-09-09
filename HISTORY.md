@@ -3,6 +3,41 @@
 For a full list of releases, see
 <a href="https://github.com/hydromatic/foodmart-data-hsqldb/releases">GitHub</a>.
 
+## <a id="0.7" href="https://github.com/hydromatic/foodmart-data-hsqldb/releases/tag/foodmart-data-hsqldb-0.7">0.7</a> / 2026-09-09
+
+This release converts the aggregate tables and `employee_closure`
+into views, and adds a second database in which those views are
+materialized. The repository has moved from `julianhyde` to
+`hydromatic`; the Maven coordinates are unchanged.
+
+The 11 `agg_*_sales_fact_1997` aggregate tables are now views that
+aggregate `sales_fact_1997`, and `employee_closure` is a view that
+computes the transitive closure of the employee hierarchy using a
+recursive query. The views have the same contents and column types
+as the tables they replace, but no indexes. If you query the
+aggregate tables often, use the second database,
+`jdbc:hsqldb:res:foodmart-mat` (constant
+`FoodmartHsqldb.MATERIALIZED_URI`), in which the views are
+materialized as indexed memory tables; it takes about 1.5 seconds
+longer to open.
+
+The CSV files and `foodmart_csv` text tables for the 12 views have
+been removed, which reduces the size of the jar file from about 10MB
+to about 4MB. `FoodmartHsqldb.tableNames()` and `generateInserts()`
+now cover only the 25 base tables.
+
+* Add a second database, `foodmart-mat`, that materializes the views
+  ([#12](https://github.com/hydromatic/foodmart-data-hsqldb/issues/12))
+* Convert the aggregate tables and `employee_closure` to views
+  ([#11](https://github.com/hydromatic/foodmart-data-hsqldb/issues/11))
+* Move repository from `julianhyde` to `hydromatic`
+  ([#13](https://github.com/hydromatic/foodmart-data-hsqldb/issues/13))
+* Bump `build-helper-maven-plugin` from 3.6.0 to 3.6.1,
+  `central-publishing-maven-plugin` from 0.9.0 to 0.11.0,
+  `maven-compiler-plugin` from 3.14.0 to 3.15.0,
+  `maven-enforcer-plugin` from 3.0.0 to 3.6.3,
+  `maven-javadoc-plugin` from 3.6.3 to 3.12.0
+
 ## <a id="0.6.1" href="https://github.com/hydromatic/foodmart-data-hsqldb/releases/tag/foodmart-data-hsqldb-0.6.1">0.6.1</a> / 2026-09-09
 
 The previous release had a serious performance problem, and
@@ -53,7 +88,8 @@ to use 2.6.1 and higher you will need Java 11.
 * Add a unit test
 * Add Apache Maven wrapper
 * Enable Dependabot
-* [[FDH-1](https://github.com/hydromatic/foodmart-data-hsqldb/issues/1)] Schema diagram
+* Schema diagram
+  ([#1](https://github.com/hydromatic/foodmart-data-hsqldb/issues/1))
 
 ## <a id="0.4" href="https://github.com/hydromatic/foodmart-data-hsqldb/releases/tag/foodmart-data-hsqldb-0.4">0.4</a> / 2015-04-07
 
